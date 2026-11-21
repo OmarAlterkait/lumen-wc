@@ -23,7 +23,8 @@ first use from this repository's release assets into `LUMEN_DATA`, or `data` und
 Five notebooks in `notebooks/`, with Super-K as the running example. They need a GPU (3 to 13 minutes each on an
 RTX 2080 Ti) and the `notebooks` extra (above). They fetch the reference data they read on first use: the repaired GDMLs
 of Super-K, WCTE and ANNIE (3 MB download) and two Geant4 events (1 MB); notebook 02 also the WCSim and Geant4
-references of Super-K and WCTE (about 100 MB). All of this repository's reference products together are 240 MB.
+references of Super-K and WCTE (about 100 MB) and its many Geant4 events (150 MB). All of this repository's
+reference products together are 390 MB.
 `LUMEN_NOTEBOOKS` names where the notebooks put the converted detector (default `./lumen-notebooks`).
 
 | Notebook | What it shows |

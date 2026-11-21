@@ -21,6 +21,11 @@ Fixed inputs, kept as stored (no producer in any repository): the MC gate's phot
 once), and `g4ref-events-wc-933e631d` (two Geant4 events of Super-K, a muon and an electron of 600 MeV, the notebooks'
 examples).
 
+`g4ref-gun-sk-9fd555c0` (notebook 02's many events: 100 muons and 100 electrons of 600 MeV at random places and
+directions in Super-K) is made by `events.sh` (lumen's `tools/g4ref/events.py`; WCSim's hit rule, as the charge
+check's references): its manifest entry gives the binary, the region and the flags, and `events.json` every event's
+vertex, direction and seed.
+
 ## What g4ref changes in Geant4
 
 g4ref (lumen's `tools/g4ref/g4ref.cc`) links Geant4 10.7.4 unmodified (`G4OpticalPhysics`, photons as primaries). Its

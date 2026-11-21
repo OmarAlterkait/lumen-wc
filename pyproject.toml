@@ -12,11 +12,11 @@ requires-python = ">=3.10,<3.14"
 authors = [{ name = "Omar Alterkait" }]
 classifiers = ["Private :: Do Not Upload"]
 # lumen is not on PyPI (PyPI's "lumen" is an unrelated package): installed from its git tag
-dependencies = ["lumen @ git+https://github.com/OmarAlterkait/lumen.git@v0.2.0"]
+dependencies = ["lumen @ git+https://github.com/OmarAlterkait/lumen.git@p4/displays"]
 
 [project.optional-dependencies]
 # the notebooks: lumen.tools.plot (matplotlib) and the notebook runner
-notebooks = ["lumen[plot] @ git+https://github.com/OmarAlterkait/lumen.git@v0.2.0", "jupyter", "nbclient", "nbformat"]
+notebooks = ["lumen[plot] @ git+https://github.com/OmarAlterkait/lumen.git@p4/displays", "jupyter", "nbclient", "nbformat"]
 test = ["pytest>=8", "nbclient", "nbformat"]
 
 [tool.hatch.metadata]
