@@ -1,0 +1,10 @@
+# tuning: macros/tuning_parameters_hkfd.mac
+# HK FD inner + outer detector as built (WCSim/WCSim develop e2dc7a48 /WCSim/WCgeom HyperK_HybridmPMT_WithOD_Realistic),
+# its nominal settings. G4OpWLS's time profile is WCSim's own, exponential (WCSimPhysicsListFactory.cc:154 sets it at
+# initialisation, over WCSimOpticalPhysics' "delta"); the command below sets the same value again. Sources follow.
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/WCgeom HyperK_HybridmPMT_WithOD_Realistic
+/WCSim/Construct
+/process/optical/wls/setTimeProfile exponential

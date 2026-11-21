@@ -1,0 +1,14 @@
+diff --git a/src/WCSimDetectorConfigs.cc b/src/WCSimDetectorConfigs.cc
+index 9b71c53..ea9112b 100644
+--- a/src/WCSimDetectorConfigs.cc
++++ b/src/WCSimDetectorConfigs.cc
+@@ -254,7 +254,8 @@ void WCSimDetectorConstruction::Cylinder_12inchHPD_15perCent()
+ void WCSimDetectorConstruction::SetHyperKGeometry()
+ {
+   WCDetectorName = "HyperK";
+-  HKGeometryNoLongerUsed(WCDetectorName);
++  // lumen refs: the obsolete-geometry exit removed, as its message instructs, to build the generic HK cylinder
++  //HKGeometryNoLongerUsed(WCDetectorName);
+   WCIDCollectionName = WCDetectorName +"-glassFaceWCPMT";
+   WCSimPMTObject * PMT = CreatePMTObject("BoxandLine20inchHQE", WCIDCollectionName);
+   WCPMTName           = PMT->GetPMTName();

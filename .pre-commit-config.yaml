@@ -1,0 +1,42 @@
+# Every hook is local. The privacy guard is lumen's (tools/hooks/privacy_guard.py of a lumen checkout: LUMEN_TOOLS,
+# default ../lumen/tools); it runs only when LUMEN_PRIVATE_PATTERNS names the maintainer's patterns file, and does
+# nothing otherwise. Install with:  pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
+repos:
+  - repo: local
+    hooks:
+      - id: privacy-guard
+        name: privacy guard (staged content and paths)
+        entry: sh -c '[ -z "$LUMEN_PRIVATE_PATTERNS" ] || exec python "${LUMEN_TOOLS:-../lumen/tools}/hooks/privacy_guard.py" staged'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+      - id: privacy-guard-message
+        name: privacy guard (commit message)
+        entry: sh -c '[ -z "$LUMEN_PRIVATE_PATTERNS" ] || exec python "${LUMEN_TOOLS:-../lumen/tools}/hooks/privacy_guard.py" message "$1"' --
+        language: system
+        stages: [commit-msg]
+      - id: privacy-guard-push
+        name: privacy guard (every outgoing commit, its blobs and the ref names)
+        entry: >-
+          sh -c '[ -z "$LUMEN_PRIVATE_PATTERNS" ] ||
+          printf "%s %s %s %s\n" "${PRE_COMMIT_LOCAL_BRANCH:-HEAD}" "$PRE_COMMIT_TO_REF" "${PRE_COMMIT_REMOTE_BRANCH:-}"
+          "${PRE_COMMIT_FROM_REF:-0000000000000000000000000000000000000000}" |
+          python "${LUMEN_TOOLS:-../lumen/tools}/hooks/privacy_guard.py" push "${PRE_COMMIT_REMOTE_NAME:-}" "${PRE_COMMIT_REMOTE_URL:-}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
+      - id: ruff-format
+        name: ruff format
+        entry: ruff format
+        language: system
+        types: [python]
+        stages: [pre-commit]
+      - id: ruff
+        name: ruff check
+        entry: ruff check
+        language: system
+        types: [python]
+        stages: [pre-commit]

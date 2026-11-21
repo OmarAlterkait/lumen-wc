@@ -1,0 +1,21 @@
+# tuning: none (ANNIE's WCSim reads macros/tuning_parameters.mac of its build directory itself)
+# ANNIE as ANNIE's WCSim builds it (ANNIEsoft/WCSim annie e88314b: its default ANNIEp2v2 geometry, the realistic tank
+# PMT content, constructed by WCSim's main at initialisation; macros/tuning_parameters.mac of the build directory, read by WCSim's
+# main), for photon-transport references. This WCSim has no DoNotApplyQE: the QE is kept as ANNIE runs it
+# (Multi_Tank_Types, refs/README.md gives the net per-tube probability lumen applies); no collection efficiency, no
+# dark noise in any element, every true hit kept (NoTrigger). Sources follow (run.sh).
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/PMTQEMethod Multi_Tank_Types
+/WCSim/LAPPDQEMethod Multi_Tank_Types
+/WCSim/PMTCollEff off
+/control/execute macros/annie_daq.mac
+/DAQ/SetDetectorElement tank
+/DAQ/Trigger NoTrigger
+/DarkRate/SetDetectorElement tank
+/DarkRate/SetDarkRate 0 kHz
+/DarkRate/SetDetectorElement mrd
+/DarkRate/SetDarkRate 0 kHz
+/DarkRate/SetDetectorElement facc
+/DarkRate/SetDarkRate 0 kHz

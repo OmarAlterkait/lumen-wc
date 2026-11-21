@@ -1,0 +1,15 @@
+# tuning: macros/tuning_parameters_hkfd.mac
+# WCTE as WCSim builds it (WCSim/WCSim develop macros/WCTE.mac: the nominal geometry, its PMT object and placement
+# file), for photon-transport references: no QE, no collection efficiency, no dark noise (the hit is the photon
+# absorbed at WCSim's photocathode boundary, glass -> InteriorWCPMT). Sources follow (run.sh).
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/mPMT/PMTtype_inner PMT3inchR14374_WCTE
+/WCSim/WCgeom nuPRISMBeamTest_16cShort_mPMT
+/WCSim/Geometry/RotateBarrelHalfTower true
+/WCSim/PMT/ReplicaPlacement false
+/WCSim/PMT/PositionVariation 0 mm
+/WCSim/PMT/TankRadiusChange 0 0 0 mm
+/WCSim/PMT/PositionFile data/mPMT_Position_WCTE.txt
+/WCSim/Construct

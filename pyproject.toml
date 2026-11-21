@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lumen-wc"
+version = "0.2.0"
+description = "lumen for water Cherenkov detectors (WCSim: Super-K, WCTE, ANNIE, Hyper-K, IWCD)."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10,<3.14"
+authors = [{ name = "Omar Alterkait" }]
+classifiers = ["Private :: Do Not Upload"]
+# lumen is not on PyPI (PyPI's "lumen" is an unrelated package): installed from its git tag
+dependencies = ["lumen @ git+https://github.com/OmarAlterkait/lumen.git@v0.2.0"]
+
+[project.optional-dependencies]
+# the notebooks: lumen.tools.plot (matplotlib) and the notebook runner
+notebooks = ["lumen[plot] @ git+https://github.com/OmarAlterkait/lumen.git@v0.2.0", "jupyter", "nbclient", "nbformat"]
+test = ["pytest>=8", "nbclient", "nbformat"]
+
+[tool.hatch.metadata]
+allow-direct-references = true  # lumen from its git tag
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lumen_wc"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["lumen", "lumen_wc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = ["slow: a full conversion of a large detector (deselect with -m 'not slow')"]

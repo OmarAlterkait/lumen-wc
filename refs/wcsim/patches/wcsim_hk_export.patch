@@ -1,0 +1,117 @@
+diff --git a/WCSim.cc b/WCSim.cc
+index 9251058..9e2485a 100644
+--- a/WCSim.cc
++++ b/WCSim.cc
+@@ -2,6 +2,7 @@
+ #include "G4ios.hh"
+ #include "G4RunManager.hh"
+ #include "G4UImanager.hh"
++#include "G4GDMLParser.hh"   // lumen refs: /persistency/gdml/write (the geometry with its optics)
+ #include "G4UIterminal.hh"
+ #include "G4UItcsh.hh"
+ #include "WCSimDetectorConstruction.hh"
+@@ -70,6 +71,8 @@ int main(int argc,char** argv)
+   G4RunManager* runManager = new G4RunManager;
+ 
+   // get the pointer to the UI manager
++  G4GDMLParser* gdmlParser = new G4GDMLParser;   // lumen refs: its messenger provides /persistency/gdml/*
++  (void)gdmlParser;
+   G4UImanager* UI = G4UImanager::GetUIpointer();
+ 
+   // Set up the tuning parameters that need to be read before the detector
+diff --git a/src/WCSimConstructMultiPMT.cc b/src/WCSimConstructMultiPMT.cc
+index 6aeb3ff..8daa037 100644
+--- a/src/WCSimConstructMultiPMT.cc
++++ b/src/WCSimConstructMultiPMT.cc
+@@ -512,14 +512,16 @@ G4LogicalVolume* WCSimDetectorConstruction::ConstructMultiPMT(G4String PMTName,
+   // TF: cut in pieces is better for different OD/ID types. But different parametrization objects needed?
+ 
+   
+-  G4VPhysicalVolume* hemisphere = 
+-    new G4PVParameterised("pmt",                            // their name
+-			  logicWCPMT,                       // their logical volume
+-			  logic_mPMT_container,             // Mother logical volume
+-			  kZAxis,                           // Are placed along this axis
+-			  NbOfTotPmt,                       // Number of PMTs (replica's)
+-			  pmtParam_id,                      // The parametrisation
+-			  checkOverlaps);                   // checking overlaps
++  // lumen refs (GDML export only): the PMTs as plain placements, each at the parameterisation's own transformation
++  // (WCSimMultiPMTParameterisation::ComputeTransformation), copy number = the parameterised copy number, so the GDML
++  // writer emits physvols instead of a paramvol. The hits runs use WCSim unpatched (G4PVParameterised).
++  G4VPhysicalVolume* hemisphere = 0;
++  for (G4int copy = 0; copy < NbOfTotPmt; copy++) {
++    G4VPhysicalVolume* pv = new G4PVPlacement(0, G4ThreeVector(), logicWCPMT, "pmt", logic_mPMT_container,
++                                              false, copy, false);   // overlaps: checked below, after the transformation
++    pmtParam_id->ComputeTransformation(copy, pv);
++    if (copy == 0) hemisphere = pv;
++  }
+   
+   
+   // Need a 4mm tolerance : still not perfect though because overlaps with mother volume happen still..
+diff --git a/src/WCSimConstructRealisticPlacement.cc b/src/WCSimConstructRealisticPlacement.cc
+index 192111d..183950d 100644
+--- a/src/WCSimConstructRealisticPlacement.cc
++++ b/src/WCSimConstructRealisticPlacement.cc
+@@ -17,6 +17,7 @@
+ #include "G4PVPlacement.hh"
+ #include "G4PVParameterised.hh"
+ #include "G4AssemblyVolume.hh"
++#include "G4AssemblyStore.hh"   // lumen refs (GDML export only)
+ #include "G4SubtractionSolid.hh"
+ #include "globals.hh"
+ #include "G4VisAttributes.hh"
+@@ -1284,6 +1285,17 @@ G4LogicalVolume* WCSimDetectorConstruction::ConstructRealisticPlacement()
+ 
+     G4cout << "Final Values : " << pmt20_count_final << " " << pmtmulti_count_final << " " << pmtod_count_final << G4endl;
+ 
++    // lumen refs (GDML export only): the assemblies are deregistered (not deleted), so the GDML writer emits their
++    // imprints as the ordinary physical volumes they are. Its assembly support reads G4AssemblyStore, whose assemblies
++    // still list the dummy PMT placements deleted above (and may alias new placements at reused addresses): the writer
++    // crashed (std::length_error / std::bad_alloc in "Writing structure"). The geometry is unchanged.
++    {
++      std::vector<G4AssemblyVolume*> assemblies(G4AssemblyStore::GetInstance()->begin(),
++                                                G4AssemblyStore::GetInstance()->end());
++      for (auto a : assemblies) G4AssemblyStore::DeRegister(a);
++      G4cout << "lumen refs: " << assemblies.size() << " assemblies deregistered for the GDML export" << G4endl;
++    }
++
+     G4cout << "FINISHED Realistic Placement" << G4endl;
+ 
+     return rockShellLogic;
+diff --git a/src/WCSimDetectorConfigs.cc b/src/WCSimDetectorConfigs.cc
+index 9b71c53..ea9112b 100644
+--- a/src/WCSimDetectorConfigs.cc
++++ b/src/WCSimDetectorConfigs.cc
+@@ -254,7 +254,8 @@ void WCSimDetectorConstruction::Cylinder_12inchHPD_15perCent()
+ void WCSimDetectorConstruction::SetHyperKGeometry()
+ {
+   WCDetectorName = "HyperK";
+-  HKGeometryNoLongerUsed(WCDetectorName);
++  // lumen refs: the obsolete-geometry exit removed, as its message instructs, to build the generic HK cylinder
++  //HKGeometryNoLongerUsed(WCDetectorName);
+   WCIDCollectionName = WCDetectorName +"-glassFaceWCPMT";
+   WCSimPMTObject * PMT = CreatePMTObject("BoxandLine20inchHQE", WCIDCollectionName);
+   WCPMTName           = PMT->GetPMTName();
+diff --git a/src/WCSimSteppingAction.cc b/src/WCSimSteppingAction.cc
+index eff6b84..c70a705 100644
+--- a/src/WCSimSteppingAction.cc
++++ b/src/WCSimSteppingAction.cc
+@@ -68,7 +68,8 @@ void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
+     G4int i;
+     for( i=0;i<nprocesses;i++){
+       if((*pv)[i]->GetProcessName()=="OpBoundary"){
+-	boundary = (G4OpBoundaryProcess*)(*pv)[i];
++	boundary = dynamic_cast<G4OpBoundaryProcess*>((*pv)[i]);   // lumen refs: null for WCSimOpBoundaryProcess
++	                                                           // (a C cast made GetStatus() undefined: crashes on 10.7)
+ 	break;
+       }
+     }
+@@ -108,7 +109,7 @@ void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
+ 
+ 
+     if(track->GetTrackStatus() == fStopAndKill){
+-      if(boundary->GetStatus() == NoRINDEX){
++      if(boundary && boundary->GetStatus() == NoRINDEX){
+ 	G4cout << "Optical photon is killed because of missing refractive index in either " << thePrePoint->GetMaterial()->GetName() << " or " << thePostPoint->GetMaterial()->GetName() <<
+ 	  " (transition from " << thePrePV->GetName() << " to " << thePostPV->GetName() << ")" <<
+ 	  " : could also be caused by Overlaps with volumes with logicalBoundaries." << G4endl;

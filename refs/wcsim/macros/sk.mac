@@ -1,0 +1,12 @@
+# tuning: macros/tuning_parameters_hkfd.mac
+# Super-Kamiokande as WCSim builds it (WCSim/WCSim develop: /WCSim/WCgeom SuperK, its default PMT object), for
+# photon-transport references: no QE, no collection efficiency, no dark noise. PMTs placed individually (no replicas:
+# a GDML export of replicas is not read by lumen). Sources follow (run.sh).
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/WCgeom SuperK
+/WCSim/PMT/ReplicaPlacement false
+/WCSim/PMT/PositionVariation 0 mm
+/WCSim/PMT/TankRadiusChange 0 0 0 mm
+/WCSim/Construct

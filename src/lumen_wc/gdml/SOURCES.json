@@ -1,0 +1,49 @@
+{
+ "note": "Hyper-K and IWCD geometry as WCSim e2dc7a48 builds it, exported to GDML by WCSim itself (WCSim publishes no GDML file: url and commit are of the WCSim source, export says how the file was written; the patches add the GDML writer and the three export-time changes of lumen_wc.wcsim, none of which changes the geometry). WCSim is MIT-licensed (its LICENSE at that commit). The export has export_sha256, the sha256 of the GDML each WCSim charge reference holds (references.json: products wcsim-hk-, wcsim-hk-id-, wcsim-hk-od- and wcsim-iwcd-e2dc7a48). Like SK's and WCTE's exports it writes inf in one GROUPVEL table (3 values, on a surface, which no Geant4 process reads), which Geant4 and lumen refuse; what ships is the copy python -m lumen.gdml.repair writes (repair), stored xz-compressed (<name>.gdml.xz); sha256 and bytes are of the decompressed file, checked when it is converted (lumen_wc.inputs).",
+ "files": {
+  "hk.gdml": {
+   "url": "https://github.com/WCSim/WCSim/tree/e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "repo": "https://github.com/WCSim/WCSim",
+   "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "export": "refs/wcsim/run.sh hk gdml (refs/wcsim/macros/hk.mac, macros/tuning_parameters_iwcd.mac; WCSim built with refs/wcsim/patches/wcsim_main_gdml.patch and wcsim_hk_export.patch against Geant4 10.7.4)",
+   "export_bytes": 14295762,
+   "export_sha256": "415ceeb76faed32cf0a58280a462055d985dbd6a97660eb11e4dd989defe16db",
+   "repair": "python -m lumen.gdml.repair EXPORT DST: matrix 'GROUPVEL0x558fd1e04150': 3 non-finite value(s) written +-1e30 (nothing else changed)",
+   "bytes": 14295765,
+   "sha256": "0823b60e3383991d17062e9d6cc268f4252796b5864c3c4eea2dfa9af9f04525"
+  },
+  "hk_id.gdml": {
+   "url": "https://github.com/WCSim/WCSim/tree/e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "repo": "https://github.com/WCSim/WCSim",
+   "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "export": "refs/wcsim/run.sh hkid gdml (refs/wcsim/macros/hkid.mac, macros/tuning_parameters_iwcd.mac; WCSim built with refs/wcsim/patches/wcsim_main_gdml.patch and wcsim_hk_export.patch against Geant4 10.7.4)",
+   "export_bytes": 7097968,
+   "export_sha256": "e4f34c1a5ef8a616977a03cd463645ef0c320bca6dd84a991cf56559d72a4c8b",
+   "repair": "python -m lumen.gdml.repair EXPORT DST: matrix 'GROUPVEL0x55cac306abb0': 3 non-finite value(s) written +-1e30 (nothing else changed)",
+   "bytes": 7097971,
+   "sha256": "a6326753e0045e5c4bb7bac6335d479c51b59c86b07f06b2bdfb2f10a4b3e916"
+  },
+  "hk_od.gdml": {
+   "url": "https://github.com/WCSim/WCSim/tree/e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "repo": "https://github.com/WCSim/WCSim",
+   "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "export": "refs/wcsim/run.sh hkod gdml (refs/wcsim/macros/hkod.mac, macros/tuning_parameters_hkfd.mac; WCSim built with refs/wcsim/patches/wcsim_main_gdml.patch and wcsim_hk_export.patch against Geant4 10.7.4)",
+   "export_bytes": 8501134,
+   "export_sha256": "9a2fab5e1bb23574ab80d7c288bfd51d08a55ca8e53bebafe3932bc01624e8e6",
+   "repair": "python -m lumen.gdml.repair EXPORT DST: matrix 'GROUPVEL0x55e4789d70a0': 3 non-finite value(s) written +-1e30 (nothing else changed)",
+   "bytes": 8501137,
+   "sha256": "ae665994bf45981bfb5f40f6fe69070577efb9990f04d2ba4e9ebc006e1f4f1c"
+  },
+  "iwcd.gdml": {
+   "url": "https://github.com/WCSim/WCSim/tree/e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "repo": "https://github.com/WCSim/WCSim",
+   "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+   "export": "refs/wcsim/run.sh iwcd gdml (refs/wcsim/macros/iwcd.mac, macros/tuning_parameters_iwcd.mac; WCSim built with refs/wcsim/patches/wcsim_main_gdml.patch and wcsim_hk_export.patch against Geant4 10.7.4)",
+   "export_bytes": 324932,
+   "export_sha256": "857445e385e909282d8886afad0d038b2b4b8331ca2eed6564619ee5e1cad058",
+   "repair": "python -m lumen.gdml.repair EXPORT DST: matrix 'GROUPVEL0x55b4bc4f8440': 3 non-finite value(s) written +-1e30 (nothing else changed)",
+   "bytes": 324935,
+   "sha256": "8d7455e67ee86ceef34d1a51560d9802ba446e2389a480529ec161195ad82dd6"
+  }
+ }
+}

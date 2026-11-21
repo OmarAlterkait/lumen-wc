@@ -1,0 +1,13 @@
+# tuning: macros/tuning_parameters_hkfd.mac
+# HK generic FD cylinder (WCSim/WCSim develop e2dc7a48 /WCSim/WCgeom HyperK, BoxandLine20inchHQE) at 20 % coverage; the
+# obsolete-geometry exit commented out (src/wcsim_hk_hits.patch). PMTs placed individually, no position variation. No QE,
+# no collection efficiency, no dark noise (run.sh). Sources follow.
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/SetPMTPercentCoverage 20
+/WCSim/WCgeom HyperK
+/WCSim/PMT/ReplicaPlacement false
+/WCSim/PMT/PositionVariation 0 mm
+/WCSim/PMT/TankRadiusChange 0 0 0 mm
+/WCSim/Construct

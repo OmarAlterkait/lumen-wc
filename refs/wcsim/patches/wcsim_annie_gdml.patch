@@ -1,0 +1,23 @@
+diff --git a/WCSim.cc b/WCSim.cc
+index 412d761..12a5164 100644
+--- a/WCSim.cc
++++ b/WCSim.cc
+@@ -1,6 +1,7 @@
+ #include "G4ios.hh"
+ #include "G4RunManager.hh"
+ #include "G4UImanager.hh"
++#include "G4GDMLParser.hh"   // lumen refs: /persistency/gdml/write (the geometry with its optics)
+ #include "G4UIterminal.hh"
+ #include "G4UItcsh.hh"
+ #include "WCSimDetectorConstruction.hh"
+@@ -105,6 +106,10 @@ int main(int argc,char** argv)
+   // Initialize G4 kernel
+   runManager->Initialize();
+ 
++  // lumen refs: its messenger provides /persistency/gdml/* -- made after the construction, whose own GDML reader
++  // (PHASE2_INNER_STRUCTURE.gdml), once deleted, removes the /persistency/gdml/ directory with every command in it
++  G4GDMLParser* gdmlParser = new G4GDMLParser;
++  (void)gdmlParser;
+   if (argc==1)   // Define UI terminal for interactive mode  
+   { 
+ 

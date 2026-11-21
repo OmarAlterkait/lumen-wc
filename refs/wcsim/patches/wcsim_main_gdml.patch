@@ -1,0 +1,44 @@
+diff --git a/WCSim.cc b/WCSim.cc
+index 9251058..9e2485a 100644
+--- a/WCSim.cc
++++ b/WCSim.cc
+@@ -2,6 +2,7 @@
+ #include "G4ios.hh"
+ #include "G4RunManager.hh"
+ #include "G4UImanager.hh"
++#include "G4GDMLParser.hh"   // lumen refs: /persistency/gdml/write (the geometry with its optics)
+ #include "G4UIterminal.hh"
+ #include "G4UItcsh.hh"
+ #include "WCSimDetectorConstruction.hh"
+@@ -70,6 +71,8 @@ int main(int argc,char** argv)
+   G4RunManager* runManager = new G4RunManager;
+ 
+   // get the pointer to the UI manager
++  G4GDMLParser* gdmlParser = new G4GDMLParser;   // lumen refs: its messenger provides /persistency/gdml/*
++  (void)gdmlParser;
+   G4UImanager* UI = G4UImanager::GetUIpointer();
+ 
+   // Set up the tuning parameters that need to be read before the detector
+diff --git a/src/WCSimSteppingAction.cc b/src/WCSimSteppingAction.cc
+index eff6b84..c70a705 100644
+--- a/src/WCSimSteppingAction.cc
++++ b/src/WCSimSteppingAction.cc
+@@ -68,7 +68,8 @@ void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
+     G4int i;
+     for( i=0;i<nprocesses;i++){
+       if((*pv)[i]->GetProcessName()=="OpBoundary"){
+-	boundary = (G4OpBoundaryProcess*)(*pv)[i];
++	boundary = dynamic_cast<G4OpBoundaryProcess*>((*pv)[i]);   // lumen refs: null for WCSimOpBoundaryProcess
++	                                                           // (a C cast made GetStatus() undefined: crashes on 10.7)
+ 	break;
+       }
+     }
+@@ -108,7 +109,7 @@ void WCSimSteppingAction::UserSteppingAction(const G4Step* aStep)
+ 
+ 
+     if(track->GetTrackStatus() == fStopAndKill){
+-      if(boundary->GetStatus() == NoRINDEX){
++      if(boundary && boundary->GetStatus() == NoRINDEX){
+ 	G4cout << "Optical photon is killed because of missing refractive index in either " << thePrePoint->GetMaterial()->GetName() << " or " << thePostPoint->GetMaterial()->GetName() <<
+ 	  " (transition from " << thePrePV->GetName() << " to " << thePostPV->GetName() << ")" <<
+ 	  " : could also be caused by Overlaps with volumes with logicalBoundaries." << G4endl;

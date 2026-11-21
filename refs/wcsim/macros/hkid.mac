@@ -1,0 +1,8 @@
+# tuning: macros/tuning_parameters_hkfd.mac
+# HK FD inner detector as built (WCSim develop e2dc7a48 /WCSim/WCgeom HyperK_HybridmPMT_IDonly_Realistic: 20" B&L in
+# frame cells + 19 x 3" R14374 mPMTs), its nominal settings (macros/WCSim__ID_custom...mac). Sources follow.
+/run/verbose 0
+/tracking/verbose 0
+/hits/verbose 0
+/WCSim/WCgeom HyperK_HybridmPMT_IDonly_Realistic
+/WCSim/Construct

@@ -1,0 +1,1006 @@
+{
+ "schema": "lumen-references/1",
+ "checks": {
+  "charge": [
+   {
+    "detector": "sk",
+    "dt": 1.0,
+    "name": "sk",
+    "nt": 700,
+    "reference": "wcsim-sk-e2dc7a48"
+   },
+   {
+    "detector": "sk",
+    "dt": 1.0,
+    "name": "sk_g4",
+    "nt": 700,
+    "reference": "sk-g4ref-export"
+   },
+   {
+    "detector": "wcte",
+    "dt": 0.25,
+    "name": "wcte",
+    "nt": 280,
+    "reference": "wcsim-wcte-e2dc7a48"
+   },
+   {
+    "detector": "wcte",
+    "dt": 0.25,
+    "name": "wcte_g4",
+    "nt": 280,
+    "reference": "wcte-g4ref-export"
+   },
+   {
+    "detector": "annie",
+    "dt": 0.25,
+    "group_column": "collection",
+    "name": "annie",
+    "note": "WCSim's quantum efficiency (Multi_Tank_Types, QEratio included) applied after absorption, from the detector's value sets (lumen's own reading, at hc / E; WCSim's wavelength 2 pi 197.3 / E is 1.3e-4 shorter). A cross-check, reported and not gated: ANNIE's WCSim (Geant4 10.1.3) loses 7 to 8 % of the light against Geant4 10.7.4 (g4ref and lumen agree), at the inner-structure frame (a G4TessellatedSolid): g4min on the repaired original GDML (gdml-repaired annie_v2.gdml, the file WCSim's export repaired and annie_g4's original run read), 1e6 photons, Geant4 10.1.3 kills 462,351 of 2,562,305 photon entries into the frame by absorption inside it (18 %), 10.7.4 64 of 949,299; 10.7.4 on the overlap-free export (annie-g4ref-export) gives every fate and hit photon for photon as on the original, so the overlap moves none of 10.7.4's light (10.1.3 aborts on the export: 'Surface Normal returned by Solid is not a Unit Vector'). annie_g4 gates. lumen / WCSim is 1.076 +- 0.0015 (chi2/ndf 6.5-7.5) since this entry stopped scaling the frame's REFLECTIVITY by 0.8182 to fold that loss in (the 0.1.3 record's 1.003 had the scale; restored on 2026-11-18's code it gives 1.0034 +- 0.0014, chi2/ndf 0.86-0.98)",
+    "nt": 320,
+    "reference": "wcsim-annie-e88314b",
+    "response": "qe"
+   },
+   {
+    "detector": "annie",
+    "dt": 0.25,
+    "group_column": "collection",
+    "name": "annie_g4",
+    "nt": 320,
+    "reference": "annie-g4ref-export"
+   },
+   {
+    "detector": "hk",
+    "dt": 1.0,
+    "name": "hk",
+    "nt": 1000,
+    "reference": "wcsim-hk-e2dc7a48"
+   },
+   {
+    "detector": "hk",
+    "dt": 1.0,
+    "name": "hk_g4",
+    "nt": 1000,
+    "reference": "hk-g4ref-export"
+   },
+   {
+    "detector": "iwcd",
+    "dt": 0.25,
+    "name": "iwcd",
+    "nt": 400,
+    "reference": "wcsim-iwcd-e2dc7a48"
+   },
+   {
+    "detector": "hk_id",
+    "dt": 1.0,
+    "group_column": "collection",
+    "name": "hk_id",
+    "nt": 1000,
+    "reference": "wcsim-hk-id-e2dc7a48"
+   },
+   {
+    "detector": "hk_od",
+    "dt": 1.0,
+    "group_column": "collection",
+    "name": "hk_od",
+    "note": "WCSim runs G4OpWLS with the exponential time profile (WCSimPhysicsListFactory.cc:154, e2dc7a48; the run macro sets it again), recorded by the recipes' decision wls_exponential; with tuning_parameters_hkfd.mac",
+    "nt": 1000,
+    "reference": "wcsim-hk-od-e2dc7a48"
+   }
+  ],
+  "geometry": [
+   {
+    "detector": "sk",
+    "gdml": "sk.gdml",
+    "name": "sk",
+    "reference": "gdml-repaired"
+   },
+   {
+    "detector": "wcte",
+    "gdml": "wcte.gdml",
+    "name": "wcte",
+    "reference": "gdml-repaired"
+   },
+   {
+    "detector": "annie",
+    "gdml": "annie_v2.gdml",
+    "name": "annie",
+    "reference": "gdml-repaired"
+   }
+  ],
+  "gradients": [
+   {
+    "detector": "sk",
+    "name": "sk",
+    "reverse": true,
+    "sources": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      8.0,
+      3.0,
+      -5.0
+     ],
+     [
+      12.0,
+      0.0,
+      12.0
+     ]
+    ],
+    "wavelength": 400.0
+   },
+   {
+    "detector": "wcte",
+    "name": "wcte",
+    "sources": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.4,
+      0.2,
+      -0.3
+     ],
+     [
+      -0.5,
+      0.0,
+      0.4
+     ]
+    ],
+    "wavelength": 400.0
+   },
+   {
+    "detector": "annie",
+    "name": "annie",
+    "sources": [
+     [
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.4,
+      0.0,
+      0.3
+     ],
+     [
+      -0.3,
+      0.3,
+      -0.4
+     ]
+    ],
+    "volume": "WCBarrel",
+    "wavelength": 400.0
+   }
+  ],
+  "mc": [
+   {
+    "detector": "sk",
+    "name": "sk",
+    "photons": "sk_photons.npz",
+    "photons_per_seed": 65536,
+    "record": "sk_record.npz",
+    "reference": "mc-gate-wc-3b241f1",
+    "seeds": 16
+   },
+   {
+    "detector": "wcte",
+    "name": "wcte",
+    "photons": "wcte_photons.npz",
+    "photons_per_seed": 65536,
+    "record": "wcte_record.npz",
+    "reference": "mc-gate-wc-3b241f1",
+    "seeds": 16
+   },
+   {
+    "detector": "annie",
+    "name": "annie",
+    "photons": "annie_photons.npz",
+    "photons_per_seed": 65536,
+    "record": "annie_record.npz",
+    "reference": "mc-gate-wc-3b241f1",
+    "seeds": 16
+   }
+  ]
+ },
+ "products": {
+  "annie-g4ref-original": {
+   "chunks": 16,
+   "files": {
+    "annie_v2_g4clean.gdml": "sha256:4aba633fd61a55889f654ecf323cf28586034b5c11222f1940822b3d4838ad92",
+    "hits.npz": "sha256:113b9e2922b14a02801eaec529851fcec51ddceaaa535b6b29bbb8e487ea3b8d",
+    "launched.json": "sha256:69a83ac3ab8a58c62a7ae54277fd5bbe61088f723a154a5bcdac33c8ff3b3385",
+    "sensors.csv": "sha256:93c2ed5b5d3dff81e377f92cf61c4a814ea6cc228e5a5a7635442c43d3fd9fc8",
+    "sources.cfg": "sha256:59efabe7eb9a30d3f09f5c9dafe4b05dec7d1c3efe642f565cb0b5f8ae92f86b"
+   },
+   "hits": 1937791,
+   "id": "annie-g4ref-original",
+   "inputs": {
+    "annie_v2_g4clean.gdml": "annie_v2_g4clean.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "annie_main.cfg",
+    "config_sha256": "59efabe7eb9a30d3f09f5c9dafe4b05dec7d1c3efe642f565cb0b5f8ae92f86b",
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "annie_v2_g4clean.gdml",
+    "gdml_sha256": "4aba633fd61a55889f654ecf323cf28586034b5c11222f1940822b3d4838ad92",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 16,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/annie_main.cfg",
+     "gdml": "lumen/store/gdml-repaired/annie_v2.gdml",
+     "time": "00:40:00"
+    },
+    "seed": 20261106,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-09",
+   "sensors": 132,
+   "sources": 4,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/annie-g4ref-original.tar.gz",
+   "sha256": "sha256:5a0abe326ec75261ce8052c326e9278662d6ce1006f80667843d1d26e1618437"
+  },
+  "g4ref-events-wc-933e631d": {
+   "files": {
+    "sk_mu600.npz": "sha256:de1d0fb8ca09f19d604f74bfaeaf196386f4608fe1107be6208ba8117d3cb0e6",
+    "sk_e600.npz": "sha256:5893c5b9fcf7cc1a6c16471c193dbdb59a7a302044e2f67060a45212f37d8c76"
+   },
+   "id": "g4ref-events-wc-933e631d",
+   "producer": {
+    "tool": "g4ref",
+    "binary_sha256": "933e631d812bced3c1215f1a9dbd5b346d044901048f68a55fa8df1980377dcd",
+    "geant4": "10.7.4",
+    "physics": "a particle gun (one particle per Geant4 event) with G4OpticalPhysics; the charged steps and the hits dumped",
+    "events": "event 0 of chunk 0 of each run, written by lumen.compare.event.extract (steps in m, ns, eV; hits; the sensor table)"
+   },
+   "reduced": "2026-11-19",
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/g4ref-events-wc-933e631d.tar.gz",
+   "sha256": "sha256:a7c91eab6ac7ec1c24518cfed33cbedea9d714742d94e8db574e36e4ef0eeb08"
+  },
+  "wcte-g4ref-original": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:8b3ded6036750d50d38ad2cccdd7194da9d32c19596bb1defd6bc22cf8122a10",
+    "launched.json": "sha256:07f70b96e4ac5258b835e06d0a4203b64c077436e7a6434d3053705f02af959c",
+    "sensors.csv": "sha256:537f41234814d6d999e5ab53124d034ca77b454a609df8ff64ac3f698db3a1ef",
+    "sources.cfg": "sha256:3248fbe3891d105dc9770a8e2c12d3a49c4b7fdefbef4356091f3420d8c601b7",
+    "wcte_probe.gdml": "sha256:3fb956572fa9e7a939b4c9d69bfcb910ecf05c1cb7c047282025611844b1adba"
+   },
+   "hits": 2527819,
+   "id": "wcte-g4ref-original",
+   "inputs": {
+    "wcte_probe.gdml": "wcte_probe.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "wcte_main.cfg",
+    "config_sha256": "3248fbe3891d105dc9770a8e2c12d3a49c4b7fdefbef4356091f3420d8c601b7",
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "wcte_probe.gdml",
+    "gdml_sha256": "3fb956572fa9e7a939b4c9d69bfcb910ecf05c1cb7c047282025611844b1adba",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/wcte_main.cfg",
+     "gdml": "lumen/store/gdml-repaired/wcte.gdml",
+     "time": "00:20:00"
+    },
+    "seed": 20261102,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-09",
+   "sensors": 1995,
+   "sources": 7,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcte-g4ref-original.tar.gz",
+   "sha256": "sha256:446026a5238fe388e317199436b2efd9e4a44a1f21d0c81e682e63fdeafcc748"
+  },
+  "gdml-repaired": {
+   "files": {
+    "annie_v2.gdml": "sha256:4aba633fd61a55889f654ecf323cf28586034b5c11222f1940822b3d4838ad92",
+    "sk.gdml": "sha256:05fea92f31049aa910441af2bf990f96b7f5186897fe833c9f3e8c1ffe73b38b",
+    "wcte.gdml": "sha256:3fb956572fa9e7a939b4c9d69bfcb910ecf05c1cb7c047282025611844b1adba"
+   },
+   "id": "gdml-repaired",
+   "inputs": {
+    "annie_v2.gdml": {
+     "dataset": "wcsim-annie-e88314b",
+     "file": "annie_v2.gdml",
+     "sha256": "sha256:d7c5eb142b1b7a61e6397ed4b96a581da4bae997f77c205d3f118ace0cb3b138"
+    },
+    "sk.gdml": {
+     "dataset": "wcsim-sk-e2dc7a48",
+     "file": "sk.gdml",
+     "sha256": "sha256:1f58c50127110e168e6546d2bfbf993104b3dd9f09a9d0e1b335bbc048d7e169"
+    },
+    "wcte.gdml": {
+     "dataset": "wcsim-wcte-e2dc7a48",
+     "file": "wcte.gdml",
+     "sha256": "sha256:ce6123ed68da113896981e55d6c864c330aaf98f8aee71a212c3d9fe595fc3da"
+    }
+   },
+   "producer": {
+    "edits": {
+     "annie_v2.gdml": "matrix 'RINDEX0x2b2c4a0': 40 denormal literal(s) written 0",
+     "sk.gdml": "matrix 'GROUPVEL0x557c1b341300': 3 non-finite value(s) written +-1e30",
+     "wcte.gdml": "matrix 'GROUPVEL0x564f8cb590b0': 3 non-finite value(s) written +-1e30"
+    },
+    "tool": "python -m lumen.gdml.repair SRC DST (lumen p3/convert): the copies of WCSim's exports Geant4 10.7.4 and 11.2.2 load; nothing but the listed values changed"
+   },
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/gdml-repaired.tar.gz",
+   "sha256": "sha256:36ff44312e58818ca4d8de5d5de178e74d5dd0c1e11267a38c62e2c788878502"
+  },
+  "mc-gate-wc-de9e145": {
+   "files": {
+    "annie_photons.npz": "sha256:e91975de3f39a04450cc98107194bdcd33f1975d920b0377c3c42acbde72f830",
+    "annie_record.npz": "sha256:3b90d0bfa6c32359e1affd9963720593574f1cc19be30cb59224e52b2cb4c370",
+    "sk_photons.npz": "sha256:a151140df74093442b2bcba2fd19a3d01efe75c9b659c587a28d1a52e3f2852e",
+    "sk_record.npz": "sha256:10a3660e454a85ada285c9626557092f53270f697fd074df92589c066a663170",
+    "wcte_photons.npz": "sha256:dae632a7539f0269414ef0e2e8fda92be6519c5ca4704da8478d53a9fd908392",
+    "wcte_record.npz": "sha256:67588ec715a6288b5a5a1592f42d281a5a67d2d480f587565a23c667228dcdaa"
+   },
+   "id": "mc-gate-wc-de9e145",
+   "inputs": {
+    "annie_photons.npz": "annie_photons.npz",
+    "annie_record.npz": "annie_record.npz",
+    "sk_photons.npz": "sk_photons.npz",
+    "sk_record.npz": "sk_record.npz",
+    "wcte_photons.npz": "wcte_photons.npz",
+    "wcte_record.npz": "wcte_record.npz"
+   },
+   "producer": {
+    "commit": "de9e145",
+    "lumen": "lumen p3/final (lumen-wc f890108)",
+    "photons": "fixed emission rows per detector (FromArrays), sampled once from the detector's golden event by lumen's port of 0.1",
+    "tool": "gates/mc_gate.py (lumen.compare.mc record: 16 seeds x 65,536 photons, the arrivals and the derivatives along each family key)"
+   },
+   "reduced": "2026-11-19",
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/mc-gate-wc-de9e145.tar.gz",
+   "sha256": "sha256:6f48317bb28b78e9aaca7e83ecfdda3d93b490f7400da7221e8a61b06c01f918"
+  },
+  "wcsim-annie-e88314b": {
+   "chunks": 8,
+   "files": {
+    "annie_v2.gdml": "sha256:d7c5eb142b1b7a61e6397ed4b96a581da4bae997f77c205d3f118ace0cb3b138",
+    "hits.npz": "sha256:9ee2b2d44792c541eadd83920f81a1cd822db824d56fa2d06626aa534bd97de1",
+    "launched.json": "sha256:69a83ac3ab8a58c62a7ae54277fd5bbe61088f723a154a5bcdac33c8ff3b3385",
+    "sensors.csv": "sha256:7a9ccaf1ecbb2abf438223eb2a141d13aed52be5108e6e8554712b9536908e98",
+    "sources.cfg": "sha256:59efabe7eb9a30d3f09f5c9dafe4b05dec7d1c3efe642f565cb0b5f8ae92f86b",
+    "tuning_parameters.mac": "sha256:434ce219f2d3de9a6850a2b21c443511feaf8b0ec9b42697af244921155555d3"
+   },
+   "hits": 530649,
+   "id": "wcsim-annie-e88314b",
+   "inputs": {
+    "annie_v2.gdml": "annie_v2.gdml",
+    "tuning_parameters.mac": "tuning_parameters.mac"
+   },
+   "producer": {
+    "commit": "e88314b31266255ed02a95ce87677f92d4c2db22",
+    "geant4": "10.1.3",
+    "harness": "WCSim run with its true-hits output (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "anniesoft_wcsim_latest.sif",
+    "image_sha256": "e9aa1b236d096ce0796724a40bddfc82e5a2f17cb88682c1922bd055e5bfe56a",
+    "macro": "WCSim macro annie.mac (kept outside the repository)",
+    "repository": "ANNIEsoft/WCSim",
+    "response": "QE kept (Multi_Tank_Types: no DoNotApplyQE in ANNIE's WCSim), collection efficiency off",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-09",
+   "sensors": 132,
+   "sources": 4,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-annie-e88314b.tar.gz",
+   "sha256": "sha256:79d37b013c6fac5953885e23bd3feeea02422457b4ee54e06d423a3b8e50f631"
+  },
+  "wcsim-hk-e2dc7a48": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:03ae34c3f07aa94c8c71d65930133a6f828575a235beef10ba7ebfb77424f8c4",
+    "hk.gdml": "sha256:415ceeb76faed32cf0a58280a462055d985dbd6a97660eb11e4dd989defe16db",
+    "launched.json": "sha256:9e1161eccfe211d4e423dfd565dba2a7804d5ab4cf7b22f06d3052e907c36b60",
+    "sensors.csv": "sha256:282460b84339a643af8fc35481a293139eb3cd03b1bea4d030984ea6a424ef2a",
+    "sources.cfg": "sha256:a5f0618dc9b5ea1c43eb9c48aa65095cf77e39dc13b47e2586d92ed31c68c94c"
+   },
+   "hits": 3910039,
+   "id": "wcsim-hk-e2dc7a48",
+   "inputs": {
+    "hk.gdml": "hk.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output, every PMT collection with its own tube ids (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro hk.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise; HyperK's obsolete-geometry exit commented out (the only change to WCSim)",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-12",
+   "sensors": 19620,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-hk-e2dc7a48.tar.gz",
+   "sha256": "sha256:28d0c04495445619d9b22e0588b4c20d94219c3cb08af30379d1f353bcfebe75"
+  },
+  "wcsim-hk-id-e2dc7a48": {
+   "chunks": 25,
+   "files": {
+    "hits.npz": "sha256:56b471869bbdd2a717b22ed68fb4604026f7b8b4842b82b0c50e368511bd9f8e",
+    "hk_id.gdml": "sha256:e4f34c1a5ef8a616977a03cd463645ef0c320bca6dd84a991cf56559d72a4c8b",
+    "launched.json": "sha256:9ac37ed98d87ff2bd8cf31131bd53dda54d9a9c377036fa26d40ae7f4b361ff6",
+    "sensors.csv": "sha256:a340b6a920fe19b7075b2900f58eaa66136bb77dd00a05a5c9f4d4257492d51c",
+    "sources.cfg": "sha256:8bc034e981ae1461064d87664d02ab52da05c41298a6b71360db81d188f69230"
+   },
+   "hits": 4727650,
+   "id": "wcsim-hk-id-e2dc7a48",
+   "inputs": {
+    "hk_id.gdml": "hk_id.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output, every PMT collection with its own tube ids (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro hkid.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise; dark noise 0 in tank and tankPMT2",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-12",
+   "sensors": 35250,
+   "sources": 7,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-hk-id-e2dc7a48.tar.gz",
+   "sha256": "sha256:f73b53e1466e917acad0c59e846d61b1ad35baa2c6d78ee5d1688eedee3eb4b4"
+  },
+  "wcsim-hk-od-e2dc7a48": {
+   "chunks": 25,
+   "files": {
+    "hits.npz": "sha256:40c566b5b8aa33c3b1a366529be8486b68c20156c70c82bc506a15f467feee25",
+    "hk_od.gdml": "sha256:9a2fab5e1bb23574ab80d7c288bfd51d08a55ca8e53bebafe3932bc01624e8e6",
+    "launched.json": "sha256:548598dc87646f53a3fdb402367a1ee853da556e755d2f69a5a5e9897c20618e",
+    "sensors.csv": "sha256:d66bbf0feffec6f89fda1b3db948c4e1b398810dd5cabebfed6c5df1d4c0b595",
+    "sources.cfg": "sha256:0126f0a97e56a46dda5c5c538a3da1cf15036e67e28d1e60ed4042c9bce67c5a"
+   },
+   "hits": 519103,
+   "id": "wcsim-hk-od-e2dc7a48",
+   "inputs": {
+    "hk_od.gdml": "hk_od.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output, every PMT collection with its own tube ids (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro hkod.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise; dark noise 0 in tank, tankPMT2 and OD; tuning_parameters_hkfd.mac; G4OpWLS time profile exponential (WCSim's default: delta)",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-13",
+   "sensors": 38818,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-hk-od-e2dc7a48.tar.gz",
+   "sha256": "sha256:2686bfdd72f06b26bfe5938eb7500999b197e9eb123f093bc3cdf67863698fe7"
+  },
+  "wcsim-iwcd-e2dc7a48": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:81e98625d30613553eee20ead2561c25546980e6b9dc0f6960fdcf02164643f7",
+    "iwcd.gdml": "sha256:857445e385e909282d8886afad0d038b2b4b8331ca2eed6564619ee5e1cad058",
+    "launched.json": "sha256:9e1161eccfe211d4e423dfd565dba2a7804d5ab4cf7b22f06d3052e907c36b60",
+    "sensors.csv": "sha256:9d05b92d6c78509cbc414c1873ce465f39de91f7e2bcd5b1ac6873c21c84184c",
+    "sources.cfg": "sha256:006d31667be51d77a8c772972d4a479fe1516ba2c822028d3193e08d392941fb"
+   },
+   "hits": 2306354,
+   "id": "wcsim-iwcd-e2dc7a48",
+   "inputs": {
+    "iwcd.gdml": "iwcd.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output, every PMT collection with its own tube ids (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro iwcd.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-12",
+   "sensors": 6992,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-iwcd-e2dc7a48.tar.gz",
+   "sha256": "sha256:ceeb93c1e964efb33c126f0e090063ae83b793bba0890a2bf4ab5e9ec28e1cde"
+  },
+  "wcsim-sk-e2dc7a48": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:7eb46c8e1f8fcf81b43a34dcdddb80b92fb78b6129c2adf2e508952bb262d664",
+    "launched.json": "sha256:f91b321be4fcd7135c1a07ca5997f3f1ae8cd3645f0c339a41f21b2028d39587",
+    "sensors.csv": "sha256:a811771825c36e504c061cc3d39d483ac763359095db526c2d740a1c433391ea",
+    "sk.gdml": "sha256:1f58c50127110e168e6546d2bfbf993104b3dd9f09a9d0e1b335bbc048d7e169",
+    "sources.cfg": "sha256:4222914727081691880b8df8dcf3648e2226c35050315b6a91a2a74d010039df"
+   },
+   "hits": 3226716,
+   "id": "wcsim-sk-e2dc7a48",
+   "inputs": {
+    "sk.gdml": "sk.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro sk.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-09",
+   "sensors": 11096,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-sk-e2dc7a48.tar.gz",
+   "sha256": "sha256:fb576febc43fdf316b41806e1b7155c29ffb26b344bc9ed782f713995f8c34cb"
+  },
+  "wcsim-wcte-e2dc7a48": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:659f8055c6c0619e28ac7880a5ed827867aef2478d301604bd66458f8025748d",
+    "launched.json": "sha256:07f70b96e4ac5258b835e06d0a4203b64c077436e7a6434d3053705f02af959c",
+    "sensors.csv": "sha256:90960adb32429767e46523309d64ab79252f6672d83901a072cec8dab3cb2d77",
+    "sources.cfg": "sha256:3248fbe3891d105dc9770a8e2c12d3a49c4b7fdefbef4356091f3420d8c601b7",
+    "wcte.gdml": "sha256:ce6123ed68da113896981e55d6c864c330aaf98f8aee71a212c3d9fe595fc3da"
+   },
+   "hits": 2529262,
+   "id": "wcsim-wcte-e2dc7a48",
+   "inputs": {
+    "wcte.gdml": "wcte.gdml"
+   },
+   "producer": {
+    "commit": "e2dc7a48b1f83c74a541123542606a90d7b67a6f",
+    "geant4": "10.3.3",
+    "harness": "WCSim run with its true-hits output (the harness is kept outside the repository)",
+    "hit": "a photon absorbed at WCSim's photocathode boundary (glass to InteriorWCPMT), true hits of trigger 0",
+    "image": "hk-software_main.sif",
+    "image_sha256": "53e28b7df7c1681eae8f8247c450874b3628e929716c8414846ccd7b082ae46f",
+    "macro": "WCSim macro wcte.mac (kept outside the repository)",
+    "repository": "WCSim/WCSim",
+    "response": "DoNotApplyQE, collection efficiency off, no dark noise",
+    "tool": "WCSim"
+   },
+   "reduced": "2026-11-09",
+   "sensors": 1995,
+   "sources": 7,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcsim-wcte-e2dc7a48.tar.gz",
+   "sha256": "sha256:926932d91ed0d220efebf0de191a72e27d3b7e33079390e5050262a28bc0a651"
+  },
+  "sk-g4ref-original": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:dd26ad4c288339a0e70e5dbb0deae978f7fb5087451266cf45c63451e4009e4a",
+    "launched.json": "sha256:f91b321be4fcd7135c1a07ca5997f3f1ae8cd3645f0c339a41f21b2028d39587",
+    "sensors.csv": "sha256:bc1da0041f099a593afb9e2433262a401eaeb6daece8641bca62f737031bd701",
+    "sources.cfg": "sha256:4222914727081691880b8df8dcf3648e2226c35050315b6a91a2a74d010039df"
+   },
+   "hits": 3225632,
+   "id": "sk-g4ref-original",
+   "inputs": {},
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "sk_main.cfg",
+    "config_sha256": "4222914727081691880b8df8dcf3648e2226c35050315b6a91a2a74d010039df",
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "sk.gdml",
+    "gdml_sha256": "05fea92f31049aa910441af2bf990f96b7f5186897fe833c9f3e8c1ffe73b38b",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/sk_main.cfg",
+     "gdml": "lumen/store/gdml-repaired/sk.gdml",
+     "time": "01:00:00"
+    },
+    "seed": 20261119,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 11096,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/sk-g4ref-original.tar.gz",
+   "sha256": "sha256:49196afd18fb64ddcc1b840f72f4d1d0441978b8256c6f70d1db2e20e6dc62ba"
+  },
+  "hk-g4ref-original": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:2c2e86bef9fb3bcfe0fbb4aafaf46771f55dd30e9c0148deb94c52750c7187c4",
+    "hk.gdml": "sha256:0823b60e3383991d17062e9d6cc268f4252796b5864c3c4eea2dfa9af9f04525",
+    "launched.json": "sha256:9e1161eccfe211d4e423dfd565dba2a7804d5ab4cf7b22f06d3052e907c36b60",
+    "sensors.csv": "sha256:2d3f8218314158a3826fb798160fe5d2557e166043425135d5c67a71cd0c4c1f",
+    "sources.cfg": "sha256:a5f0618dc9b5ea1c43eb9c48aa65095cf77e39dc13b47e2586d92ed31c68c94c"
+   },
+   "hits": 3908093,
+   "id": "hk-g4ref-original",
+   "inputs": {
+    "hk.gdml": "hk.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "sources.cfg",
+    "config_sha256": "a5f0618dc9b5ea1c43eb9c48aa65095cf77e39dc13b47e2586d92ed31c68c94c",
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "hk.gdml",
+    "gdml_sha256": "0823b60e3383991d17062e9d6cc268f4252796b5864c3c4eea2dfa9af9f04525",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/store/wcsim-hk-e2dc7a48/sources.cfg",
+     "gdml": "lumen/g4ref/geom/hk.gdml",
+     "time": "01:00:00"
+    },
+    "seed": 20261120,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 19620,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/hk-g4ref-original.tar.gz",
+   "sha256": "sha256:1d342d5db7c5118ba055eb63f7b9fdde68a724ce4b607937bf290e511a24268b"
+  },
+  "sk-g4ref-export": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:30de72b9da9bf86edd7fe3655a5face0c9a3dbd6e44b4a8dd859606b28384352",
+    "launched.json": "sha256:f91b321be4fcd7135c1a07ca5997f3f1ae8cd3645f0c339a41f21b2028d39587",
+    "sensors.csv": "sha256:bc1da0041f099a593afb9e2433262a401eaeb6daece8641bca62f737031bd701",
+    "sk_owned.gdml": "sha256:04eb4c36c6a310139aa3d20de2da9a10df9302c2317b8790c208c19388eecbe3",
+    "sources.cfg": "sha256:4222914727081691880b8df8dcf3648e2226c35050315b6a91a2a74d010039df"
+   },
+   "hits": 3223634,
+   "id": "sk-g4ref-export",
+   "inputs": {
+    "sk_owned.gdml": "sk_owned.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "sk_main.cfg",
+    "config_sha256": "4222914727081691880b8df8dcf3648e2226c35050315b6a91a2a74d010039df",
+    "export": {
+     "detector": "sk",
+     "detector_digest": "sha256:ade9b49ab606d4f706e1221df3a1c16706f5eac08c6a7f2472c248c03c1c94a5",
+     "lossless": true,
+     "lumen": "0.0.0",
+     "notes": [
+      "no overlapping siblings, no daughter reaching out of its mother: written as it is"
+     ],
+     "original": "sk-g4ref-original",
+     "sha256": "sha256:04eb4c36c6a310139aa3d20de2da9a10df9302c2317b8790c208c19388eecbe3",
+     "tool": "lumen.compare.ownership"
+    },
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "sk_owned.gdml",
+    "gdml_sha256": "04eb4c36c6a310139aa3d20de2da9a10df9302c2317b8790c208c19388eecbe3",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/sk_main.cfg",
+     "gdml": "lumen/g4ref/export_min/sk_owned.gdml",
+     "time": "02:00:00"
+    },
+    "seed": 20263119,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 11096,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/sk-g4ref-export.tar.gz",
+   "sha256": "sha256:ce9db7500ded73ce1908d35d055c54716a4376d964636ee5c4599dceaaafe710"
+  },
+  "hk-g4ref-export": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:872c16708d9ee93d198ec8b08460088391a1066a9010b100b0804bd1a242117b",
+    "hk_owned.gdml": "sha256:676d24ea79bd06035295dd5616ae4a48e567116a56b774de53081d155f585ec8",
+    "launched.json": "sha256:9e1161eccfe211d4e423dfd565dba2a7804d5ab4cf7b22f06d3052e907c36b60",
+    "sensors.csv": "sha256:2d3f8218314158a3826fb798160fe5d2557e166043425135d5c67a71cd0c4c1f",
+    "sources.cfg": "sha256:a5f0618dc9b5ea1c43eb9c48aa65095cf77e39dc13b47e2586d92ed31c68c94c"
+   },
+   "hits": 3908063,
+   "id": "hk-g4ref-export",
+   "inputs": {
+    "hk_owned.gdml": "hk_owned.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "sources.cfg",
+    "config_sha256": "a5f0618dc9b5ea1c43eb9c48aa65095cf77e39dc13b47e2586d92ed31c68c94c",
+    "export": {
+     "detector": "hk",
+     "detector_digest": "sha256:d8a5748288d1895987bd31e692428a00b4f5a8bb123d44fa0fa1e0c301c5bdf3",
+     "lossless": true,
+     "lumen": "0.0.0",
+     "notes": [
+      "no overlapping siblings, no daughter reaching out of its mother: written as it is"
+     ],
+     "original": "hk-g4ref-original",
+     "sha256": "sha256:676d24ea79bd06035295dd5616ae4a48e567116a56b774de53081d155f585ec8",
+     "tool": "lumen.compare.ownership"
+    },
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "hk_owned.gdml",
+    "gdml_sha256": "676d24ea79bd06035295dd5616ae4a48e567116a56b774de53081d155f585ec8",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/store/wcsim-hk-e2dc7a48/sources.cfg",
+     "gdml": "lumen/g4ref/export_min/hk_owned.gdml",
+     "time": "02:00:00"
+    },
+    "seed": 20263120,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 19620,
+   "sources": 5,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/hk-g4ref-export.tar.gz",
+   "sha256": "sha256:6f1dffd6b9ecbca03113512f1a0b4447f3a03d229318aee335be611a986801d5"
+  },
+  "wcte-g4ref-export": {
+   "chunks": 100,
+   "files": {
+    "hits.npz": "sha256:eca31e53cebf77e301b3927624387eade2ddc7f2e3f3be658389b074deae123c",
+    "launched.json": "sha256:07f70b96e4ac5258b835e06d0a4203b64c077436e7a6434d3053705f02af959c",
+    "sensors.csv": "sha256:537f41234814d6d999e5ab53124d034ca77b454a609df8ff64ac3f698db3a1ef",
+    "sources.cfg": "sha256:3248fbe3891d105dc9770a8e2c12d3a49c4b7fdefbef4356091f3420d8c601b7",
+    "wcte_owned.gdml": "sha256:785cedad959c31c0f2151f3af0d4371737b4ebb802ab27f9413b78a57ab30667"
+   },
+   "hits": 2529823,
+   "id": "wcte-g4ref-export",
+   "inputs": {
+    "wcte_owned.gdml": "wcte_owned.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "wcte_main.cfg",
+    "config_sha256": "3248fbe3891d105dc9770a8e2c12d3a49c4b7fdefbef4356091f3420d8c601b7",
+    "export": {
+     "detector": "wcte",
+     "detector_digest": "sha256:b6d433374b8c01443b34136e0b46892a585123a776f502049a7d5a6dbc71352d",
+     "lossless": true,
+     "lumen": "0.0.0",
+     "notes": [
+      "no overlapping siblings, no daughter reaching out of its mother: written as it is"
+     ],
+     "original": "wcte-g4ref-original",
+     "sha256": "sha256:785cedad959c31c0f2151f3af0d4371737b4ebb802ab27f9413b78a57ab30667",
+     "tool": "lumen.compare.ownership"
+    },
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "wcte_owned.gdml",
+    "gdml_sha256": "785cedad959c31c0f2151f3af0d4371737b4ebb802ab27f9413b78a57ab30667",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 100,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/wcte_main.cfg",
+     "gdml": "lumen/g4ref/export_min/wcte_owned.gdml",
+     "time": "01:00:00"
+    },
+    "seed": 20265102,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 1995,
+   "sources": 7,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/wcte-g4ref-export.tar.gz",
+   "sha256": "sha256:c1e96dd9710f458df02cb0d583b4e09b545bf0aee8226b915f87fa9fea26f42e"
+  },
+  "annie-g4ref-export": {
+   "chunks": 64,
+   "files": {
+    "annie_owned.gdml": "sha256:48ac2294dac78e38fb6127e3221b2035d70dc537bfdfd7b88428fa2463c1dca6",
+    "hits.npz": "sha256:12c442512231945628fca2af7e572d81490b893aa570e82384b7574d14d40493",
+    "launched.json": "sha256:69a83ac3ab8a58c62a7ae54277fd5bbe61088f723a154a5bcdac33c8ff3b3385",
+    "sensors.csv": "sha256:93c2ed5b5d3dff81e377f92cf61c4a814ea6cc228e5a5a7635442c43d3fd9fc8",
+    "sources.cfg": "sha256:59efabe7eb9a30d3f09f5c9dafe4b05dec7d1c3efe642f565cb0b5f8ae92f86b"
+   },
+   "hits": 1939347,
+   "id": "annie-g4ref-export",
+   "inputs": {
+    "annie_owned.gdml": "annie_owned.gdml"
+   },
+   "producer": {
+    "binary": "g4ref",
+    "binary_sha256": "9fd555c0c4982458834db9800bfcd7e5c7a4815de5c1e4005f4910018a24fd84",
+    "config": "annie_main.cfg",
+    "config_sha256": "59efabe7eb9a30d3f09f5c9dafe4b05dec7d1c3efe642f565cb0b5f8ae92f86b",
+    "export": {
+     "detector": "annie",
+     "detector_digest": "sha256:06947e84919751adf3aed6475bd27866b2a31b73403433187b00417a11812561",
+     "lossless": true,
+     "lumen": "0.1.4.dev457+g054390d",
+     "notes": [
+      "cad_logical in WCBarrel less ANNIEHolder, WCCapBlackSheet0x2d20740, WCCapBlackSheetHole0x323db40, WCLAPPD"
+     ],
+     "original": "annie-g4ref-original",
+     "sha256": "sha256:48ac2294dac78e38fb6127e3221b2035d70dc537bfdfd7b88428fa2463c1dca6",
+     "tool": "lumen.compare.ownership"
+    },
+    "flags": [
+     "--wcsim-hits"
+    ],
+    "gdml": "annie_owned.gdml",
+    "gdml_sha256": "48ac2294dac78e38fb6127e3221b2035d70dc537bfdfd7b88428fa2463c1dca6",
+    "geant4": "10.7.4",
+    "image": "Geant4 10.7.4 image",
+    "nchunks": 64,
+    "patch": "tools/g4ref/velocity_after_relocation.patch (the photon speed after a reflection at a relocation: the medium of the volume it continues in)",
+    "pencil": null,
+    "physics": "G4OpticalPhysics, photons as primaries",
+    "run": {
+     "config": "lumen/wcsim/out/annie_main.cfg",
+     "gdml": "lumen/g4ref/export_min2/annie_owned.gdml",
+     "time": "01:30:00"
+    },
+    "seed": 20265106,
+    "sens_regex": "^InteriorWCPMT",
+    "source": "g4ref.cc",
+    "source_sha256": "50ca6bdd08af3a082399778e86a1b260dae39a89a6d5131e7093f27b046528a1",
+    "tool": "g4ref"
+   },
+   "reduced": "2026-11-19",
+   "sensors": 132,
+   "sources": 4,
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/annie-g4ref-export.tar.gz",
+   "sha256": "sha256:fc03539c37f6bf58b475525ff4670606577764ef0b7864aecf7ca39fe9edea71"
+  },
+  "mc-gate-wc-3b241f1": {
+   "files": {
+    "annie_photons.npz": "sha256:e91975de3f39a04450cc98107194bdcd33f1975d920b0377c3c42acbde72f830",
+    "annie_record.npz": "sha256:b47f854ee4bd33acfd7e0d35865eff3d490eaea1793331b21ca66b9d5295824e",
+    "sk_photons.npz": "sha256:a151140df74093442b2bcba2fd19a3d01efe75c9b659c587a28d1a52e3f2852e",
+    "sk_record.npz": "sha256:67b6081d93d2f2bdd4e906fba112e249fcf9458ef8c48232cd122e0cb90b3c0e",
+    "wcte_photons.npz": "sha256:dae632a7539f0269414ef0e2e8fda92be6519c5ca4704da8478d53a9fd908392",
+    "wcte_record.npz": "sha256:7e9eaefb78da06ef5c5ad85b4d4e2aa6ce6ae6e3ac4b2bdab04a8b45608b2716"
+   },
+   "id": "mc-gate-wc-3b241f1",
+   "inputs": {
+    "annie_photons.npz": "annie_photons.npz",
+    "annie_record.npz": "annie_record.npz",
+    "sk_photons.npz": "sk_photons.npz",
+    "sk_record.npz": "sk_record.npz",
+    "wcte_photons.npz": "wcte_photons.npz",
+    "wcte_record.npz": "wcte_record.npz"
+   },
+   "producer": {
+    "commit": "3b241f1",
+    "lumen": "lumen p3/final 3b241f1 (lumen-wc p3/rebase, recipes as bb67c0b; tallymap cba41b6)",
+    "photons": "fixed emission rows per detector (FromArrays), sampled once from the detector's reference event",
+    "tool": "python -m lumen.compare gate --package lumen_wc (lumen.compare.mc record: 16 seeds x 65,536 photons, the arrivals and the derivatives along each family key)",
+    "environment": {
+     "annie": {
+      "commits": {
+       "lumen": "0.1.4.dev632+g3b241f1",
+       "tallymap": "0.7.1",
+       "jax": "0.6.2",
+       "jaxlib": "0.6.2",
+       "cuda": "PJRT C API cuda 12080",
+       "nvrtc": "12.9.86"
+      },
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "date": "2026-11-20 11:11"
+     },
+     "sk": {
+      "commits": {
+       "lumen": "0.1.4.dev632+g3b241f1",
+       "tallymap": "0.7.1",
+       "jax": "0.6.2",
+       "jaxlib": "0.6.2",
+       "cuda": "PJRT C API cuda 12080",
+       "nvrtc": "12.9.86"
+      },
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "date": "2026-11-20 11:10"
+     },
+     "wcte": {
+      "commits": {
+       "lumen": "0.1.4.dev632+g3b241f1",
+       "tallymap": "0.7.1",
+       "jax": "0.6.2",
+       "jaxlib": "0.6.2",
+       "cuda": "PJRT C API cuda 12080",
+       "nvrtc": "12.9.86"
+      },
+      "gpu": "NVIDIA GeForce RTX 2080 Ti",
+      "date": "2026-11-20 11:12"
+     }
+    },
+    "environment_note": "tallymap reports its package version (0.7.1); the tree is main cba41b6, lumen's pin"
+   },
+   "reduced": "2026-11-20",
+   "url": "https://github.com/OmarAlterkait/lumen-wc/releases/download/v0.2.0/mc-gate-wc-3b241f1.tar.gz",
+   "sha256": "sha256:c71ec545729d4e95b4604323f407331888a49da02f1934053614dab284eb940d"
+  }
+ }
+}
